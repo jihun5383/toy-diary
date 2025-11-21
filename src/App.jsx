@@ -240,9 +240,9 @@ function App () {
                 </button>
               )}
             </div>
-            <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
-              <div className="grid gap-6 sm:grid-cols-2">
-                <label className="flex flex-col gap-3 text-sm text-white/75">
+            <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="space-y-3 text-sm text-white/75">
                   <span className="text-white text-base">날짜</span>
                   <input
                     type="date"
@@ -251,7 +251,7 @@ function App () {
                     className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-white outline-none transition focus:border-white/40"
                   />
                 </label>
-                <label className="flex flex-col gap-3 text-sm text-white/75">
+                <label className="space-y-3 text-sm text-white/75">
                   <span className="text-white text-base">기분</span>
                   <select
                     value={form.mood}
@@ -267,7 +267,7 @@ function App () {
                 </label>
               </div>
 
-              <label className="flex flex-col gap-3 text-sm text-white/75">
+              <label className="space-y-3 text-sm text-white/75">
                 <span className="text-white text-base">제목</span>
                 <input
                   value={form.title}
@@ -277,7 +277,7 @@ function App () {
                 />
               </label>
 
-              <label className="flex flex-col gap-3 text-sm text-white/75">
+              <label className="space-y-3 text-sm text-white/75">
                 <span className="text-white text-base">내용</span>
                 <textarea
                   value={form.content}
