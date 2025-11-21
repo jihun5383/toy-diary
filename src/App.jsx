@@ -3,10 +3,10 @@ import { useEffect, useMemo, useState } from 'react'
 const STORAGE_KEY = 'toy-diary-entries'
 
 const moods = [
-  { value: 'bright', label: '😊 Bright' },
-  { value: 'calm', label: '😌 Calm' },
-  { value: 'reflective', label: '🧠 Reflective' },
-  { value: 'stormy', label: '🌧️ Stormy' }
+  { value: 'bright', label: '😊 밝음' },
+  { value: 'calm', label: '😌 차분' },
+  { value: 'reflective', label: '🧠 성찰적' },
+  { value: 'stormy', label: '🌧️ 우중충' }
 ]
 
 const emptyEntry = {
@@ -35,16 +35,16 @@ function Stats ({ entries }) {
 
   return (
     <div className="grid gap-4 sm:grid-cols-3">
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur">
-        <p className="text-sm text-white/60">Total entries</p>
+      <div className="rounded-2xl border border-white/15 bg-white/10 p-4 shadow-xl backdrop-blur">
+        <p className="text-sm text-white/70">총 기록</p>
         <p className="text-3xl font-semibold text-white">{entries.length}</p>
       </div>
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur">
-        <p className="text-sm text-white/60">Last saved</p>
+      <div className="rounded-2xl border border-white/15 bg-white/10 p-4 shadow-xl backdrop-blur">
+        <p className="text-sm text-white/70">마지막 저장</p>
         <p className="text-lg text-white">{entries[0] ? formatTime(entries[0].updatedAt) : '—'}</p>
       </div>
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur">
-        <p className="text-sm text-white/60">Mood mix</p>
+      <div className="rounded-2xl border border-white/15 bg-white/10 p-4 shadow-xl backdrop-blur">
+        <p className="text-sm text-white/70">기분 분포</p>
         <div className="mt-2 flex flex-wrap gap-2 text-sm text-white">
           {moods.map(mood => (
             <span key={mood.value} className="rounded-full bg-white/10 px-3 py-1">
@@ -63,29 +63,29 @@ function EntryCard ({ entry, onEdit, onDelete }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-white/60">{entry.date}</p>
-          <h3 className="mt-2 text-xl font-semibold text-white">{entry.title || 'Untitled note'}</h3>
-          <p className="mt-2 text-white/70">{entry.content || 'No content added yet.'}</p>
+          <h3 className="mt-2 text-xl font-semibold text-white">{entry.title || '제목 없음'}</h3>
+          <p className="mt-2 text-white/70">{entry.content || '아직 내용이 없어요.'}</p>
         </div>
         <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-white/80">
-          {moods.find(m => m.value === entry.mood)?.label || '📝 Note'}
+          {moods.find(m => m.value === entry.mood)?.label || '📝 메모'}
         </span>
       </div>
-      <div className="mt-4 flex items-center justify-between text-sm text-white/60">
-        <p>Updated • {formatTime(entry.updatedAt)}</p>
+      <div className="mt-4 flex items-center justify-between text-sm text-white/65">
+        <p>업데이트 • {formatTime(entry.updatedAt)}</p>
         <div className="flex gap-3 opacity-0 transition group-hover:opacity-100">
           <button
             type="button"
             onClick={() => onEdit(entry)}
             className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/20"
           >
-            Edit
+            수정
           </button>
           <button
             type="button"
             onClick={() => onDelete(entry.id)}
             className="rounded-full bg-rose-500/80 px-3 py-1 text-white hover:bg-rose-500"
           >
-            Delete
+            삭제
           </button>
         </div>
       </div>
@@ -96,16 +96,16 @@ function EntryCard ({ entry, onEdit, onDelete }) {
 function Filters ({ search, date, onSearchChange, onDateChange }) {
   return (
     <div className="grid gap-4 sm:grid-cols-[1.5fr_1fr]">
-      <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white backdrop-blur focus-within:border-white/30">
+      <label className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 text-white backdrop-blur focus-within:border-white/40">
         <span className="text-white/60">🔍</span>
         <input
           value={search}
           onChange={e => onSearchChange(e.target.value)}
-          placeholder="Search title or content"
-          className="w-full bg-transparent text-white placeholder:text-white/50 focus:outline-none"
+          placeholder="제목이나 내용을 검색해보세요"
+          className="w-full bg-transparent text-white placeholder:text-white/60 focus:outline-none"
         />
       </label>
-      <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white backdrop-blur focus-within:border-white/30">
+      <label className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 text-white backdrop-blur focus-within:border-white/40">
         <span className="text-white/60">📅</span>
         <input
           type="date"
@@ -119,7 +119,7 @@ function Filters ({ search, date, onSearchChange, onDateChange }) {
             onClick={() => onDateChange('')}
             className="text-sm text-white/60 hover:text-white"
           >
-            Clear
+            지우기
           </button>
         )}
       </label>
@@ -200,63 +200,63 @@ function App () {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-900 text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.06),transparent_25%),radial-gradient(circle_at_80%_0%,rgba(99,102,241,0.18),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(14,165,233,0.15),transparent_28%)]" aria-hidden="true" />
-      <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-14 sm:px-8">
-        <header className="flex flex-col gap-6">
-          <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-white/80 backdrop-blur">
-            <span className="text-lg">✨</span> Curate your day with intention
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-slate-800 to-sky-900 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_25%),radial-gradient(circle_at_80%_0%,rgba(129,140,248,0.28),transparent_32%),radial-gradient(circle_at_80%_80%,rgba(56,189,248,0.25),transparent_30%)]" aria-hidden="true" />
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-14 pt-14 sm:px-8">
+        <header className="flex flex-col gap-7">
+          <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm text-white/85 backdrop-blur">
+            <span className="text-lg">✨</span> 하루를 더 밝고 의도적으로 정리해보세요
           </p>
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
-              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">Toy Diary</h1>
-              <p className="mt-3 max-w-2xl text-lg text-white/70">
-                Capture the pulse of your day with a minimalist, modern journal. Log thoughts, moods, and highlights in one luminous space.
+              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">토이 다이어리</h1>
+              <p className="mt-3 max-w-2xl text-lg text-white/80">
+                미니멀한 저널에서 하루의 순간과 기분을 기록하세요. 가벼운 메모부터 깊은 생각까지 한눈에 정리됩니다.
               </p>
             </div>
-            <div className="rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur">
-              Local mode • autosaves instantly
+            <div className="rounded-full bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur">
+              로컬 모드 • 자동 저장
             </div>
           </div>
           <Stats entries={entries} />
         </header>
 
         <main className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-            <div className="flex items-center justify-between gap-3">
+          <section className="rounded-3xl border border-white/15 bg-white/10 p-7 shadow-2xl backdrop-blur">
+            <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-white/60">Journal</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-white/70">저널</p>
                 <h2 className="text-2xl font-semibold text-white">
-                  {editingId ? 'Edit entry' : 'New entry'}
+                  {editingId ? '기록 편집' : '새 기록'}
                 </h2>
               </div>
               {editingId && (
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="rounded-full bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+                  className="rounded-full bg-white/15 px-3 py-1.5 text-sm text-white hover:bg-white/25"
                 >
-                  Cancel edit
+                  편집 취소
                 </button>
               )}
             </div>
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="space-y-2 text-sm text-white/70">
-                  <span className="text-white">Date</span>
+            <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="space-y-3 text-sm text-white/75">
+                  <span className="text-white text-base">날짜</span>
                   <input
                     type="date"
                     value={form.date}
                     onChange={e => setForm(prev => ({ ...prev, date: e.target.value }))}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white outline-none transition focus:border-white/30"
+                    className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-white outline-none transition focus:border-white/40"
                   />
                 </label>
-                <label className="space-y-2 text-sm text-white/70">
-                  <span className="text-white">Mood</span>
+                <label className="space-y-3 text-sm text-white/75">
+                  <span className="text-white text-base">기분</span>
                   <select
                     value={form.mood}
                     onChange={e => setForm(prev => ({ ...prev, mood: e.target.value }))}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white outline-none transition focus:border-white/30"
+                    className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-white outline-none transition focus:border-white/40"
                   >
                     {moods.map(mood => (
                       <option key={mood.value} value={mood.value} className="bg-slate-900 text-white">
@@ -267,43 +267,43 @@ function App () {
                 </label>
               </div>
 
-              <label className="space-y-2 text-sm text-white/70">
-                <span className="text-white">Title</span>
+              <label className="space-y-3 text-sm text-white/75">
+                <span className="text-white text-base">제목</span>
                 <input
                   value={form.title}
                   onChange={e => setForm(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="e.g. Slow morning with a bright walk"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-white placeholder:text-white/50 outline-none transition focus:border-white/30"
+                  placeholder="예) 햇살 좋은 아침 산책"
+                  className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-3 text-white placeholder:text-white/60 outline-none transition focus:border-white/40"
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-white/70">
-                <span className="text-white">Notes</span>
+              <label className="space-y-3 text-sm text-white/75">
+                <span className="text-white text-base">내용</span>
                 <textarea
                   value={form.content}
                   onChange={e => setForm(prev => ({ ...prev, content: e.target.value }))}
-                  placeholder="Capture highlights, feelings, and what you want to remember."
-                  className="min-h-[160px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/50 outline-none transition focus:border-white/30"
+                  placeholder="오늘 기억하고 싶은 감정과 순간을 적어보세요."
+                  className="min-h-[170px] w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 text-white placeholder:text-white/60 outline-none transition focus:border-white/40"
                 />
               </label>
 
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="text-sm text-white/60">
-                  Entries save locally. No sign-in required.
+                <p className="text-sm text-white/70">
+                  기록은 로컬에만 저장되어 로그인 없이도 안심하고 사용할 수 있어요.
                 </p>
                 <div className="flex gap-3">
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-white/80 transition hover:border-white/40 hover:text-white"
+                    className="rounded-full border border-white/25 px-4 py-2.5 text-sm font-medium text-white/85 transition hover:border-white/45 hover:text-white"
                   >
-                    Reset
+                    초기화
                   </button>
                   <button
                     type="submit"
-                    className="rounded-full bg-gradient-to-r from-indigo-500 via-sky-500 to-teal-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:shadow-indigo-500/50"
+                    className="rounded-full bg-gradient-to-r from-indigo-400 via-sky-400 to-teal-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-400/30 transition hover:shadow-sky-400/50"
                   >
-                    {editingId ? 'Update entry' : 'Save entry'}
+                    {editingId ? '기록 업데이트' : '기록 저장'}
                   </button>
                 </div>
               </div>
@@ -313,11 +313,11 @@ function App () {
           <section className="space-y-4">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-white/60">Library</p>
-                <h2 className="text-2xl font-semibold text-white">Recent entries</h2>
+                <p className="text-sm uppercase tracking-[0.3em] text-white/70">라이브러리</p>
+                <h2 className="text-2xl font-semibold text-white">최근 기록</h2>
               </div>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-white/70">
-                {filteredEntries.length} shown
+              <span className="rounded-full bg-white/10 px-3 py-1.5 text-sm text-white/75">
+                {filteredEntries.length}개 표시 중
               </span>
             </div>
 
@@ -330,9 +330,9 @@ function App () {
 
             <div className="space-y-4">
               {filteredEntries.length === 0 && (
-                <div className="rounded-2xl border border-dashed border-white/15 bg-white/5 p-6 text-center text-white/70 backdrop-blur">
-                  <p className="text-lg font-semibold text-white">No entries yet</p>
-                  <p className="mt-1">Write your first note to see it here.</p>
+                <div className="rounded-2xl border border-dashed border-white/15 bg-white/10 p-6 text-center text-white/75 backdrop-blur">
+                  <p className="text-lg font-semibold text-white">아직 기록이 없어요</p>
+                  <p className="mt-1">첫 번째 메모를 작성해보세요.</p>
                 </div>
               )}
               {filteredEntries.map(entry => (
