@@ -225,7 +225,6 @@ function App () {
           <section className="rounded-3xl border border-white/15 bg-white/10 p-7 shadow-2xl backdrop-blur">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-white/70">저널</p>
                 <h2 className="text-2xl font-semibold text-white">
                   {editingId ? '기록 편집' : '새 기록'}
                 </h2>
@@ -267,8 +266,8 @@ function App () {
                 </label>
               </div>
 
-              <label className="space-y-3 text-sm text-white/75">
-                <span className="text-white text-base">제목</span>
+              <label className="space-y-3 text-sm text-white/75 ">
+                <span className="text-white text-base inline-block mt-5">제목</span>
                 <input
                   value={form.title}
                   onChange={e => setForm(prev => ({ ...prev, title: e.target.value }))}
@@ -278,7 +277,7 @@ function App () {
               </label>
 
               <label className="space-y-3 text-sm text-white/75">
-                <span className="text-white text-base">내용</span>
+                <span className="text-white text-base inline-block mt-5">내용</span>
                 <textarea
                   value={form.content}
                   onChange={e => setForm(prev => ({ ...prev, content: e.target.value }))}
@@ -328,7 +327,7 @@ function App () {
               onDateChange={setFilterDate}
             />
 
-            <div className="space-y-4 lg:flex-1 lg:min-h-0 lg:overflow-y-auto lg:pr-2">
+            <div className="space-y-4  h-[500px] overflow-y-auto lg:pr-2">
               {filteredEntries.length === 0 && (
                 <div className="rounded-2xl border border-dashed border-white/15 bg-white/10 p-6 text-center text-white/75 backdrop-blur">
                   <p className="text-lg font-semibold text-white">아직 기록이 없어요</p>
